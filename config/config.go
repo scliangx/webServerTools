@@ -3,7 +3,7 @@ package config
 import (
 	"encoding/json"
 	"fmt"
-	"gorm.io/gorm"
+	"github.com/jinzhu/gorm"
 	"io/ioutil"
 	"log"
 	"os"
