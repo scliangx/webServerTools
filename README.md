@@ -23,5 +23,5 @@
     ├─static                     静态资源
     └─utils                      常用工具函数
    
-  request -> router -> controller -> apps -> controller -> response
+  request -> apps -> router -> controller -> manager -> controller -> response
  ```
