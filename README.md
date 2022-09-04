@@ -22,6 +22,6 @@
 └─utils               常用工具函数
 
 
-request -> router -> controller -> apps -> response
+request -> router -> controller -> apps -> controller -> response
 ```
  
