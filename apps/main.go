@@ -1,13 +1,17 @@
 package main
 
 import (
+	"fmt"
 	"github.com/gin-gonic/gin"
+	"github.com/scliang-strive/webServerTools/common/logger"
+	_ "github.com/scliang-strive/webServerTools/common/logger"
 	"github.com/scliang-strive/webServerTools/config"
 	"github.com/scliang-strive/webServerTools/http_server/routes"
+	"github.com/scliang-strive/webServerTools/services/cache"
+	"github.com/scliang-strive/webServerTools/services/db"
+	"github.com/sirupsen/logrus"
 	"github.com/urfave/cli/v2"
-	"log"
 	"os"
-	"os/signal"
 	"runtime"
 )
 
@@ -31,27 +35,36 @@ func main() {
 	}
 
 	if err := app.Run(os.Args); err != nil {
+		logrus.Error("[error] : %s", err)
 		panic(err)
 	}
 	return
 }
 
+
 func run(c *cli.Context) error {
 	path := c.String("config")
 	config.LoadConfigFromYaml(path)
+	fmt.Println("------------load config success------------------")
+	logger.LogInit()
+	fmt.Println("------------log init success------------------")
 	conf := config.GetConfig()
-
 	if conf.Debug {
 		gin.SetMode(gin.DebugMode)
 	} else {
 		gin.SetMode(gin.ReleaseMode)
 	}
-	quit := make(chan os.Signal, 1)
-	signal.Notify(quit, os.Interrupt)
-	<-quit
-	log.Println("Shutdown Server ...")
-
+	err := db.NewConnection(conf.DB)
+	if err != nil{
+		panic("database init failed.")
+	}else{
+		fmt.Println("------------database init success------------------")
+	}
+	//cache.NewRedisClient()
+	cache.InitRedisClientPool(conf.Redis)
+	fmt.Println("------------cache init success----------------------")
 	router := routes.InitApiRouter()
 	routes.Run(router)
+	fmt.Println("-------------------apps end------------------")
 	return nil
 }

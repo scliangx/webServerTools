@@ -1,17 +1,21 @@
 package cache
 
 import (
+	"fmt"
 	"github.com/go-redis/redis"
 	"github.com/scliang-strive/webServerTools/config"
+	"github.com/sirupsen/logrus"
 	"time"
 )
 
-func NewRedisClient() *redis.Client {
+var redisCli *redis.Client
+
+func NewRedisClient()  {
 	cfg := config.GetConfig().Redis
 	rdb := redis.NewClient(&redis.Options{
-		Addr:         cfg.Address,
+		Addr:         fmt.Sprintf("%s:%d",cfg.Address,cfg.Port),
 		Password:     cfg.Password,
-		DB:           cfg.DB,
+		DB:           cfg.IndexDb,
 		DialTimeout:  10 * time.Second,
 		ReadTimeout:  30 * time.Second,
 		WriteTimeout: 30 * time.Second,
@@ -19,8 +23,14 @@ func NewRedisClient() *redis.Client {
 		PoolTimeout:  30 * time.Second,
 	})
 
-	if err := rdb.Ping(); err != nil {
-		return nil
+	if err := rdb.Ping().Err(); err != nil {
+		logrus.Error("redis connection failed.",err)
+		return
 	}
-	return rdb
+	redisCli = rdb
+	return
+}
+
+func GetClient() *redis.Client{
+	return redisCli
 }

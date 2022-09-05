@@ -45,6 +45,10 @@ func InitConsumer(cfg config.KafkaConfig) *kafka.Consumer {
 	if err != nil {
 		panic(err)
 	}
+	err = consumer.SubscribeTopics(cfg.Topic, nil)
+	if err != nil {
+		panic(err)
+	}
 	fmt.Print("init kafka consumer success\n")
 	return consumer
 }

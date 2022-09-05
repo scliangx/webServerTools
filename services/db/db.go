@@ -1,6 +1,7 @@
 package db
 
 import (
+	_ "database/sql"
 	"fmt"
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/jinzhu/gorm"
@@ -10,7 +11,7 @@ import (
 )
 
 var (
-	connection map[string]*gorm.DB
+	connection = make(map[string]*gorm.DB)
 )
 
 const (
@@ -18,33 +19,35 @@ const (
 	PostgreSql = "postgres"
 )
 
-func NewConnection(cfg config.Database) {
+func NewConnection(cfg config.Database) error {
 	if cfg.Driver == "mysql" {
-		dbUri := fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?charset=utf8&parseTime=true",
-			cfg.UserName,
+		dbUri := fmt.Sprintf("%s:%s@tcp(%s:%d)/%s?charset=utf8&parseTime=true",
+			cfg.Username,
 			cfg.Password,
 			cfg.Host,
 			cfg.Port,
-			cfg.Driver)
+			cfg.Database)
 		db, err := gorm.Open(cfg.Driver, dbUri)
 		if err != nil {
 			log.Print(err.Error())
+			return err
 		}
-		connection[cfg.Driver] = db
+		connection[Mysql] = db
 	} else if cfg.Driver == "postgres" {
-		dbUri := fmt.Sprintf("host=%s port=%s user=%s dbname=%s sslmode=disable password=%s",
+		dbUri := fmt.Sprintf("host=%s port=%d dbname=%s user=%s  sslmode=disable password=%s",
 			cfg.Host,
 			cfg.Port,
-			cfg.UserName,
 			cfg.Database,
+			cfg.Username,
 			cfg.Password)
 		db, err := gorm.Open(cfg.Driver, dbUri)
 		if err != nil {
 			log.Print(err.Error())
+			return err
 		}
-		connection[cfg.Driver] = db
+		connection[PostgreSql] = db
 	}
-	return
+	return nil
 }
 
 func BossDB() map[string]*gorm.DB {

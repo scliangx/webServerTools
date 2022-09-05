@@ -3,7 +3,7 @@ package config
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/jinzhu/gorm"
+	"github.com/sirupsen/logrus"
 	"io/ioutil"
 	"log"
 	"os"
@@ -17,31 +17,31 @@ import (
 
 // Log 日志基本配置
 type Log struct {
-	Prefix  string `mapstructure:"prefix" json:"prefix" ini:"prefix" yaml:"prefix"`
-	LogFile bool   `mapstructure:"log-file" json:"log-file" ini:"log-file" yaml:"log-file" toml:"log-file"`
-	Stdout  string `mapstructure:"stdout" json:"stdout" ini:"stdout" yaml:"stdout"`
-	File    string `mapstructure:"file" json:"file" ini:"file" yaml:"file"`
+	Prefix   string `mapstructure:"prefix" json:"prefix" ini:"prefix" yaml:"prefix"`
+	LogFile  bool   `mapstructure:"log-file" json:"log-file" ini:"log-file" yaml:"log-file" toml:"log-file"`
+	Stdout   string `mapstructure:"stdout" json:"stdout" ini:"stdout" yaml:"stdout"`
+	File     string `mapstructure:"file" json:"file" ini:"file" yaml:"file"`
+	LogLevel int    `json:"log_level" yaml:"log_level"`
 }
 
 // KafkaConfig 配置
 type KafkaConfig struct {
-	Topic            string `json:"topic" yaml:"topic"`
-	GroupId          string `json:"group.id" yaml:"group_id"`
-	BootstrapServers string `json:"bootstrap.servers" yaml:"bootstrap_servers"`
-	SecurityProtocol string `json:"security.protocol" yaml:"security_protocol"`
-	SaslMechanism    string `json:"sasl.mechanism" yaml:"sasl_mechanism"`
-	SaslUsername     string `json:"sasl.username" yaml:"sasl_username"`
-	SaslPassword     string `json:"sasl.password" yaml:"sasl_password"`
+	Topic            []string `json:"topic" yaml:"topic"`
+	GroupId          string   `json:"group.id" yaml:"group_id"`
+	BootstrapServers string   `json:"bootstrap.servers" yaml:"bootstrap_servers"`
+	SecurityProtocol string   `json:"security.protocol" yaml:"security_protocol"`
+	SaslMechanism    string   `json:"sasl.mechanism" yaml:"sasl_mechanism"`
+	SaslUsername     string   `json:"sasl.username" yaml:"sasl_username"`
+	SaslPassword     string   `json:"sasl.password" yaml:"sasl_password"`
 }
 
 // Database 连接配置
 type Database struct {
-	*gorm.DB
 	Driver       string `json:"driver" yaml:"driver"`
 	Host         string `json:"host" yaml:"host"`
 	Port         int    `json:"port" yaml:"port"`
 	Database     string `json:"database" yaml:"database"`
-	UserName     string `json:"username" yaml:"username"`
+	Username     string `json:"username" yaml:"username"`
 	Password     string `json:"password" yaml:"password"`
 	Charset      string `json:"charset" yaml:"charset"`
 	MaxIdleConns int    `json:"max_idle_conns" yaml:"max_idle_conns"`
@@ -59,7 +59,7 @@ type RedisConfig struct {
 	MaxActive         int    `json:"max_active" yaml:"max_active"`
 	ConnTimeout       int64  `json:"conn_timeout" yaml:"conn_timeout"`
 	MaxRetryTimes     int    `json:"max_retry_times" yaml:"max_retry_times"`
-	ReConnectInterval int64    `json:"re_connect_interval" yaml:"re_connect_interval"`
+	ReConnectInterval int64  `json:"re_connect_interval" yaml:"re_connect_interval"`
 }
 
 // WebServer 服务地址端口配置
@@ -68,7 +68,7 @@ type WebServer struct {
 	Port    int    `json:"port" yaml:"port"`
 }
 
-type Config struct {
+type config struct {
 	Debug     bool        `json:"debug" yaml:"debug"`
 	Logger    Log         `json:"logger" yaml:"logger"`
 	WebConfig WebServer   `json:"web_config" yaml:"web_config"`
@@ -77,9 +77,9 @@ type Config struct {
 	Redis     RedisConfig `json:"redis" yaml:"redis"`
 }
 
-var C *Config
+var C  = new(config)
 
-func GetConfig() *Config {
+func GetConfig() *config {
 	return C
 }
 
@@ -101,7 +101,6 @@ func LoadConfigFromJson(configPath string) {
 		panic(err)
 	}
 
-	fmt.Println(C)
 }
 
 func LoadConfigFromIni(configPath string) {
@@ -110,7 +109,6 @@ func LoadConfigFromIni(configPath string) {
 		log.Println(err)
 		return
 	}
-	fmt.Println(C)
 }
 
 func LoadConfigFromYaml(configPath string) {
@@ -123,7 +121,6 @@ func LoadConfigFromYaml(configPath string) {
 		fmt.Println(err)
 		return
 	}
-	fmt.Println(C)
 }
 
 func LoadConfigFromToml(configPath string) {
@@ -131,7 +128,6 @@ func LoadConfigFromToml(configPath string) {
 	if err != nil {
 		panic(err)
 	}
-	fmt.Println(C)
 }
 
 func ParseConfigByViper(configPath, configName, configType string) {
@@ -151,7 +147,7 @@ func ParseConfigByViper(configPath, configName, configType string) {
 	})
 	//直接反序列化为Struct
 	if err := v.Unmarshal(C); err != nil {
-		fmt.Println(err)
+		logrus.Error(err)
 	}
 	return
 }

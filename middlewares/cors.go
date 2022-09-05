@@ -2,6 +2,7 @@ package middware
 
 import (
 	"github.com/gin-gonic/gin"
+	uuid "github.com/twinj/uuid"
 )
 
 // CorsNext 允许跨域
@@ -20,5 +21,12 @@ func CorsNext() gin.HandlerFunc {
 		} else {
 			c.Next()
 		}
+	}
+}
+
+func RequestIDMiddleware() gin.HandlerFunc {
+	return func(c *gin.Context) {
+		c.Writer.Header().Set("X-Request-Id", uuid.NewV4().String())
+		c.Next()
 	}
 }
