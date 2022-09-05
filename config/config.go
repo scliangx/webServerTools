@@ -17,21 +17,21 @@ import (
 
 // Log 日志基本配置
 type Log struct {
-	Prefix  string `mapstructure:"prefix" json:"prefix" ini:"prefix"`
+	Prefix  string `mapstructure:"prefix" json:"prefix" ini:"prefix" yaml:"prefix"`
 	LogFile bool   `mapstructure:"log-file" json:"log-file" ini:"log-file" yaml:"log-file" toml:"log-file"`
-	Stdout  string `mapstructure:"stdout" json:"stdout" ini:"stdout"`
-	File    string `mapstructure:"file" json:"file" ini:"file"`
+	Stdout  string `mapstructure:"stdout" json:"stdout" ini:"stdout" yaml:"stdout"`
+	File    string `mapstructure:"file" json:"file" ini:"file" yaml:"file"`
 }
 
 // KafkaConfig 配置
 type KafkaConfig struct {
-	Topic            string `json:"topic"`
-	GroupId          string `json:"group.id"`
-	BootstrapServers string `json:"bootstrap.servers"`
-	SecurityProtocol string `json:"security.protocol"`
-	SaslMechanism    string `json:"sasl.mechanism"`
-	SaslUsername     string `json:"sasl.username"`
-	SaslPassword     string `json:"sasl.password"`
+	Topic            string `json:"topic" yaml:"topic"`
+	GroupId          string `json:"group.id" yaml:"group_id"`
+	BootstrapServers string `json:"bootstrap.servers" yaml:"bootstrap_servers"`
+	SecurityProtocol string `json:"security.protocol" yaml:"security_protocol"`
+	SaslMechanism    string `json:"sasl.mechanism" yaml:"sasl_mechanism"`
+	SaslUsername     string `json:"sasl.username" yaml:"sasl_username"`
+	SaslPassword     string `json:"sasl.password" yaml:"sasl_password"`
 }
 
 // Database 连接配置
@@ -50,23 +50,31 @@ type Database struct {
 
 // RedisConfig 连接配置
 type RedisConfig struct {
-	Address  string `json:"address"`
-	Password string `json:"password"`
-	DB       int    `json:"db"`
+	Address           string `json:"address" yaml:"address"`
+	Port              int    `json:"port" yaml:"port"`
+	Password          string `json:"password" yaml:"password"`
+	IndexDb           int    `json:"index_db" yaml:"index_db"`
+	MaxIdleConns      int    `json:"max_idle_conns" yaml:"max_idle_conns"`
+	MaxOpenConns      int    `json:"max_open_conns" yaml:"max_open_conns"`
+	MaxActive         int    `json:"max_active" yaml:"max_active"`
+	ConnTimeout       int64  `json:"conn_timeout" yaml:"conn_timeout"`
+	MaxRetryTimes     int    `json:"max_retry_times" yaml:"max_retry_times"`
+	ReConnectInterval int64    `json:"re_connect_interval" yaml:"re_connect_interval"`
 }
 
 // WebServer 服务地址端口配置
 type WebServer struct {
-	Address string `json:"address"`
-	Port    int    `json:"port"`
+	Address string `json:"address" yaml:"address"`
+	Port    int    `json:"port" yaml:"port"`
 }
 
 type Config struct {
-	Logger    Log         `json:"logger"`
-	WebConfig WebServer   `json:"web_config"`
-	Kafka     KafkaConfig `json:"kafka"`
-	DB        Database    `json:"db"`
-	Redis     RedisConfig `json:"redis"`
+	Debug     bool        `json:"debug" yaml:"debug"`
+	Logger    Log         `json:"logger" yaml:"logger"`
+	WebConfig WebServer   `json:"web_config" yaml:"web_config"`
+	Kafka     KafkaConfig `json:"kafka" yaml:"kafka"`
+	DB        Database    `json:"db" yaml:"db"`
+	Redis     RedisConfig `json:"redis" yaml:"redis"`
 }
 
 var C *Config
