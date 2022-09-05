@@ -3,7 +3,7 @@ package models
 import (
 	"fmt"
 	"github.com/jinzhu/gorm"
-	"github.com/scliang-strive/webServerTools/services/db"
+	"github.com/scliang-strive/webServerTools/internal/db"
 )
 
 type User struct {

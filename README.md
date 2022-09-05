@@ -16,7 +16,7 @@
     │  ├─models                  数据库模型
     │  └─routes                  服务路由
     ├─middlewares                中间件
-    ├─services                   项目服务组件
+    ├─internal                   项目服务组件
     │  ├─cache                   缓存组件
     │  ├─db                      数据库组件
     │  └─kafka                   kafka消息队列组件
