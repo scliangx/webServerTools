@@ -25,3 +25,7 @@
    
   request -> apps -> router -> controller -> manager -> controller -> response
  ```
+### run app:
+```text
+go run apps/main.go web-server --config ./config.yaml
+```
