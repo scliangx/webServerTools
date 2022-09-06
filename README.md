@@ -18,14 +18,20 @@
     │  ├─manager                 实际处理业务层
     │  ├─models                  数据库模型
     │  └─routes                  服务路由
-    ├─middlewares                中间件
     ├─internal                   项目服务核心组件
-    │  ├─cache                   缓存组件
     │  ├─db                      数据库组件
-    │  └─kafka                   kafka消息队列组件
-    ├─static                     静态资源
+    │  ├─elasticsearch           es组件相关实现
+    │  ├─grpc                    grpc相关
+    │  ├─kafka                   kafka消息队列组件
+    │  ├─mongodb                 mangodb组件相关实现
+    │  ├─oss                     oss相关操作
+    │  ├─rabbitmq                rabbitmq消息队列
+    │  ├─redis                   redis组件
+    │  └─sessions                session实现
+    ├─middlewares                中间件
+    ├─proto                      proto文件存放目录
     └─utils                      常用工具函数
-   
+
   request -> apps -> router -> controller -> manager -> controller -> response
  ```
 ### run app:
