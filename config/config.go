@@ -18,7 +18,7 @@ import (
 // Log 日志基本配置
 type Log struct {
 	Prefix   string `mapstructure:"prefix" json:"prefix" ini:"prefix" yaml:"prefix"`
-	LogFile  bool   `mapstructure:"log-file" json:"log-file" ini:"log-file" yaml:"log-file" toml:"log-file"`
+	LogFile  bool   `mapstructure:"log_file" json:"log_file" ini:"log_file" yaml:"log_file" toml:"log_file"`
 	Stdout   string `mapstructure:"stdout" json:"stdout" ini:"stdout" yaml:"stdout"`
 	File     string `mapstructure:"file" json:"file" ini:"file" yaml:"file"`
 	LogLevel int    `json:"log_level" yaml:"log_level"`
@@ -27,12 +27,12 @@ type Log struct {
 // KafkaConfig 配置
 type KafkaConfig struct {
 	Topic            []string `json:"topic" yaml:"topic"`
-	GroupId          string   `json:"group.id" yaml:"group_id"`
-	BootstrapServers string   `json:"bootstrap.servers" yaml:"bootstrap_servers"`
-	SecurityProtocol string   `json:"security.protocol" yaml:"security_protocol"`
-	SaslMechanism    string   `json:"sasl.mechanism" yaml:"sasl_mechanism"`
-	SaslUsername     string   `json:"sasl.username" yaml:"sasl_username"`
-	SaslPassword     string   `json:"sasl.password" yaml:"sasl_password"`
+	GroupId          string   `json:"group_id" yaml:"group_id"`
+	BootstrapServers string   `json:"bootstrap_servers" yaml:"bootstrap_servers"`
+	SecurityProtocol string   `json:"security_protocol" yaml:"security_protocol"`
+	SaslMechanism    string   `json:"sasl_mechanism" yaml:"sasl_mechanism"`
+	SaslUsername     string   `json:"sasl_username" yaml:"sasl_username"`
+	SaslPassword     string   `json:"sasl_password" yaml:"sasl_password"`
 }
 
 // Database 连接配置
@@ -73,7 +73,7 @@ type config struct {
 	Logger    Log         `json:"logger" yaml:"logger"`
 	WebConfig WebServer   `json:"web_config" yaml:"web_config"`
 	Kafka     KafkaConfig `json:"kafka" yaml:"kafka"`
-	DB        Database    `json:"db" yaml:"db"`
+	DB        []Database    `json:"db" yaml:"db"`
 	Redis     RedisConfig `json:"redis" yaml:"redis"`
 }
 

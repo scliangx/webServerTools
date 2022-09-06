@@ -1,0 +1,54 @@
+debug = true
+
+[logger]
+prefix = ""
+stdout = "stdout"
+file = "log"
+log_level = 1
+
+[web_config]
+address = "0.0.0.0"
+port = 9_999
+
+[kafka]
+topic = [ "XXX" ]
+group_id = "XXX"
+bootstrap_servers = "XXX:XX,XXX:XX,XXX:XX"
+security_protocol = "PLAINTEXT"
+sasl_mechanism = "PLAIN"
+sasl_username = "XXX"
+sasl_password = "XXX"
+
+[[db]]
+driver = "mysql"
+host = "xxxx"
+port = 3_306
+database = "xxx"
+username = "root"
+password = "xxx"
+charset = "utf-8"
+max_idle_conns = 100
+max_open_conns = 10
+
+[[db]]
+driver = "postgres"
+host = "xxxx"
+port = 3_306
+database = "xxx"
+username = "root"
+password = "xxx"
+charset = "utf-8"
+max_idle_conns = 100
+max_open_conns = 10
+
+[redis]
+address = "xxx"
+port = 6_379
+password = "xxx"
+index_db = 0
+max_idle_conns = 100
+max_open_conns = 100
+max_active = 10
+conn_timeout = 30
+max_retry_times = 5
+re_connect_interval = 3

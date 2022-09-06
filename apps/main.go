@@ -44,7 +44,6 @@ func run(c *cli.Context) error {
 	config.LoadConfigFromYaml(path)
 	fmt.Println("------------load config success------------------")
 	logger.LogInit()
-	fmt.Println("level: ",logrus.GetLevel())
 	fmt.Println("------------log init success------------------")
 	conf := config.GetConfig()
 	err := db.NewConnection(conf.DB)

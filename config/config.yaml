@@ -16,15 +16,26 @@ kafka:
   sasl_username: "XXX"
   sasl_password: "XXX"
 db:
-  driver: "mysql"
-  host: "xxxx"
-  port: 3306
-  database: "xxx"
-  username: "root"
-  password: "xxx"
-  charset: "utf-8"
-  max_idle_conns: 100
-  max_open_conns: 10
+  -
+    driver: "mysql"
+    host: "xxxx"
+    port: 3306
+    database: "xxx"
+    username: "root"
+    password: "xxx"
+    charset: "utf-8"
+    max_idle_conns: 100
+    max_open_conns: 10
+  -
+    driver: "postgres"
+    host: "xxxx"
+    port: 3306
+    database: "xxx"
+    username: "root"
+    password: "xxx"
+    charset: "utf-8"
+    max_idle_conns: 100
+    max_open_conns: 10
 redis:
   address: "xxx"
   port: 6379
