@@ -26,6 +26,7 @@ func InitApiRouter() *gin.Engine {
 		router = gin.Default()
 	}
 	router.Use(middleware.LoggerMiddleware())
+	router.Static("../static","./static")
 	//router.Use(middleware.GinLogger())
 	ApiRouter(router)
 	return router
