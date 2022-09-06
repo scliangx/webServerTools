@@ -1,3 +1,5 @@
 package global
 
-type Application struct {}
+type Application struct {
+
+}
