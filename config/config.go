@@ -62,6 +62,14 @@ type RedisConfig struct {
 	ReConnectInterval int64  `json:"re_connect_interval" yaml:"re_connect_interval"`
 }
 
+type Elasticsearch struct {
+	Host     []string `json:"host" yaml:"host"`
+	Username string   `json:"username" yaml:"username"`
+	Password string   `json:"password" yaml:"password"`
+	CloudId  string   `json:"cloud_id" yaml:"cloud_id"`
+	APIKey   string   `json:"api_key" yaml:"api_key"`
+}
+
 // WebServer 服务地址端口配置
 type WebServer struct {
 	Address string `json:"address" yaml:"address"`
@@ -69,15 +77,16 @@ type WebServer struct {
 }
 
 type config struct {
-	Debug     bool        `json:"debug" yaml:"debug"`
-	Logger    Log         `json:"logger" yaml:"logger"`
-	WebConfig WebServer   `json:"web_config" yaml:"web_config"`
-	Kafka     KafkaConfig `json:"kafka" yaml:"kafka"`
+	Debug     bool          `json:"debug" yaml:"debug"`
+	Logger    Log           `json:"logger" yaml:"logger"`
+	WebConfig WebServer     `json:"web_config" yaml:"web_config"`
+	Kafka     KafkaConfig   `json:"kafka" yaml:"kafka"`
 	DB        []Database    `json:"db" yaml:"db"`
-	Redis     RedisConfig `json:"redis" yaml:"redis"`
+	Redis     RedisConfig   `json:"redis" yaml:"redis"`
+	ES        Elasticsearch `json:"es" yaml:"es"`
 }
 
-var C  = new(config)
+var C = new(config)
 
 func GetConfig() *config {
 	return C

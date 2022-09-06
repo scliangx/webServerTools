@@ -47,3 +47,7 @@ redis:
   conn_timeout: 30
   max_retry_times: 5
   re_connect_interval: 3
+es:
+  host: [""]
+  username: ""
+  password: ""
