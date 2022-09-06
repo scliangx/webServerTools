@@ -4,7 +4,7 @@
  ```text
     ├─apps                       程序入口
     ├─common                     常用的项目公共代码
-    │  ├─error                   项目同意错误信息
+    │  ├─error                   项目全局错误信息
     │  ├─global                  项目全局参数
     │  ├─logger                  项目日志
     │  └─response                项目统一响应
@@ -16,7 +16,7 @@
     │  ├─models                  数据库模型
     │  └─routes                  服务路由
     ├─middlewares                中间件
-    ├─internal                   项目服务组件
+    ├─internal                   项目服务核心组件
     │  ├─cache                   缓存组件
     │  ├─db                      数据库组件
     │  └─kafka                   kafka消息队列组件
