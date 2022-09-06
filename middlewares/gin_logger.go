@@ -29,7 +29,7 @@ func LoggerMiddleware() gin.HandlerFunc{
 			"Method": method,
 			"status": statusCode,
 		})
-		if len(c.Errors) > 0 {  // 矿建内部错误
+		if len(c.Errors) > 0 {  // 创建内部错误
 			Log.Error(c.Errors.ByType(gin.ErrorTypePrivate))
 		}
 		if statusCode >= 500 {
@@ -42,7 +42,7 @@ func LoggerMiddleware() gin.HandlerFunc{
 	}
 }
 
-// GinRecovery recover掉项目可能出现的panic，并使用zap记录相关日志
+// GinRecovery recover掉项目可能出现的panic
 func GinRecovery(stack bool) gin.HandlerFunc {
 	return func(c *gin.Context) {
 		if err := recover(); err != nil {
