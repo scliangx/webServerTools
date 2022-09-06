@@ -2,16 +2,14 @@ package main
 
 import (
 	"fmt"
-	"os"
-	"runtime"
-
-	"github.com/gin-gonic/gin"
-	"github.com/scliang-strive/webServerTools/common/logger"
-	_ "github.com/scliang-strive/webServerTools/common/logger"
-	"github.com/scliang-strive/webServerTools/config"
 	"github.com/scliang-strive/webServerTools/http_server/routes"
 	"github.com/scliang-strive/webServerTools/internal/db"
 	"github.com/scliang-strive/webServerTools/internal/redis"
+	"os"
+	"runtime"
+
+	"github.com/scliang-strive/webServerTools/common/logger"
+	"github.com/scliang-strive/webServerTools/config"
 	"github.com/sirupsen/logrus"
 	"github.com/urfave/cli/v2"
 )
@@ -39,7 +37,6 @@ func main() {
 		logrus.Error("[error] : %s", err)
 		panic(err)
 	}
-	return
 }
 
 func run(c *cli.Context) error {
@@ -47,16 +44,12 @@ func run(c *cli.Context) error {
 	config.LoadConfigFromYaml(path)
 	fmt.Println("------------load config success------------------")
 	logger.LogInit()
+	fmt.Println("level: ",logrus.GetLevel())
 	fmt.Println("------------log init success------------------")
 	conf := config.GetConfig()
-	if conf.Debug {
-		gin.SetMode(gin.DebugMode)
-	} else {
-		gin.SetMode(gin.ReleaseMode)
-	}
 	err := db.NewConnection(conf.DB)
 	if err != nil {
-		panic("database init failed.")
+		logrus.Fatalln("database init failed.")
 	} else {
 		fmt.Println("------------database init success------------------")
 	}

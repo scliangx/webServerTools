@@ -7,7 +7,7 @@ import (
 	"github.com/jinzhu/gorm"
 	_ "github.com/lib/pq"
 	"github.com/scliang-strive/webServerTools/config"
-	"log"
+	"github.com/sirupsen/logrus"
 )
 
 var (
@@ -29,7 +29,7 @@ func NewConnection(cfg config.Database) error {
 			cfg.Database)
 		db, err := gorm.Open(cfg.Driver, dbUri)
 		if err != nil {
-			log.Print(err.Error())
+			logrus.Error("init database failed. [ERROR:]",err.Error())
 			return err
 		}
 		connection[Mysql] = db
@@ -42,7 +42,7 @@ func NewConnection(cfg config.Database) error {
 			cfg.Password)
 		db, err := gorm.Open(cfg.Driver, dbUri)
 		if err != nil {
-			log.Print(err.Error())
+			logrus.Error("init database failed. [ERROR:]",err.Error())
 			return err
 		}
 		connection[PostgreSql] = db

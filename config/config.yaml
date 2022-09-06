@@ -1,9 +1,9 @@
 debug: true
 logger:
   prefix: ""
-  stdout: "file"
+  stdout: "stdout"       # stdout: 输出到控制台  file: 输出到文件 其他: 同时写入文件并输出到控制台
   file: "log"
-  log_level: 3
+  log_level: 1           # 0：PanicLevel 1: ErrorLevel 2: WarnLevel 3: InfoLevel 4: DebugLevel
 web_config:
   address: "0.0.0.0"
   port: 9999
