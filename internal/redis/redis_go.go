@@ -1,10 +1,11 @@
-package cache
+package redis
 
 import (
 	"fmt"
+	"time"
+
 	"github.com/gomodule/redigo/redis"
 	"github.com/scliang-strive/webServerTools/config"
-	"time"
 )
 
 var redisPool *redis.Pool
@@ -130,19 +131,20 @@ func (r *RedisClient) Bytes(reply interface{}, err error) ([]byte, error) {
 	return redis.Bytes(reply, err)
 }
 
-func (r *RedisClient) Get(key string) interface{}{
-	val,err := r.client.Do("GET",key)
+func (r *RedisClient) Get(key string) interface{} {
+	val, err := r.client.Do("GET", key)
 	if err != nil {
 		return nil
 	}
-	return  val
+	return val
 }
 
-func (r *RedisClient) Set(key,val string) bool{
+func (r *RedisClient) Set(key, val string) bool {
 	_, err := r.client.Do("SET", key, val)
 	if err != nil {
 		return false
 	}
-	return  true
+	return true
 }
+
 // 以上封装了很多最常见类型转换函数，其他您可以参考以上格式自行封装

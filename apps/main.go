@@ -2,17 +2,18 @@ package main
 
 import (
 	"fmt"
+	"os"
+	"runtime"
+
 	"github.com/gin-gonic/gin"
 	"github.com/scliang-strive/webServerTools/common/logger"
 	_ "github.com/scliang-strive/webServerTools/common/logger"
 	"github.com/scliang-strive/webServerTools/config"
 	"github.com/scliang-strive/webServerTools/http_server/routes"
-	"github.com/scliang-strive/webServerTools/internal/cache"
 	"github.com/scliang-strive/webServerTools/internal/db"
+	"github.com/scliang-strive/webServerTools/internal/redis"
 	"github.com/sirupsen/logrus"
 	"github.com/urfave/cli/v2"
-	"os"
-	"runtime"
 )
 
 func main() {
@@ -41,7 +42,6 @@ func main() {
 	return
 }
 
-
 func run(c *cli.Context) error {
 	path := c.String("config")
 	config.LoadConfigFromYaml(path)
@@ -55,14 +55,14 @@ func run(c *cli.Context) error {
 		gin.SetMode(gin.ReleaseMode)
 	}
 	err := db.NewConnection(conf.DB)
-	if err != nil{
+	if err != nil {
 		panic("database init failed.")
-	}else{
+	} else {
 		fmt.Println("------------database init success------------------")
 	}
-	//cache.NewRedisClient()
-	cache.InitRedisClientPool(conf.Redis)
-	fmt.Println("------------cache init success----------------------")
+	//redis.NewRedisClient()
+	redis.InitRedisClientPool(conf.Redis)
+	fmt.Println("------------redis init success----------------------")
 	router := routes.InitApiRouter()
 	routes.Run(router)
 	fmt.Println("-------------------apps end------------------")

@@ -1,11 +1,12 @@
-package cache
+package redis
 
 import (
 	"fmt"
+	"time"
+
 	"github.com/go-redis/redis"
 	"github.com/scliang-strive/webServerTools/config"
 	"github.com/sirupsen/logrus"
-	"time"
 )
 
 var redisCli *redis.Client
