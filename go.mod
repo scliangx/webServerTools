@@ -19,11 +19,13 @@ require (
 	github.com/lib/pq v1.10.2
 	github.com/satori/go.uuid v1.2.0
 	github.com/sirupsen/logrus v1.9.0
+	github.com/speps/go-hashids v2.0.0+incompatible
 	github.com/spf13/viper v1.3.2
 	github.com/twinj/uuid v1.0.0
 	github.com/urfave/cli/v2 v2.11.2
 	golang.org/x/net v0.0.0-20220722155237-a158d28d115b
 	google.golang.org/grpc v1.48.0
+	gopkg.in/gomail.v2 v2.0.0-20160411212932-81ebce5c23df
 	gopkg.in/yaml.v2 v2.4.0
 )
 
@@ -65,6 +67,7 @@ require (
 	golang.org/x/text v0.3.7 // indirect
 	google.golang.org/genproto v0.0.0-20220902135211-223410557253 // indirect
 	google.golang.org/protobuf v1.28.1 // indirect
+	gopkg.in/alexcesaro/quotedprintable.v3 v3.0.0-20150716171945-2caba252f4dc // indirect
 	gopkg.in/check.v1 v1.0.0-20201130134442-10cb98267c6c // indirect
 	gopkg.in/fsnotify.v1 v1.4.7 // indirect
 	gopkg.in/go-playground/assert.v1 v1.2.1 // indirect
