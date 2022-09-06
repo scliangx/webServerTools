@@ -14,7 +14,7 @@ import (
 
 var LevelMap = map[int]log.Level{}
 
-func init(){
+func init() {
 	LevelMap = make(map[int]log.Level)
 	LevelMap[0] = log.PanicLevel
 	LevelMap[1] = log.ErrorLevel
@@ -44,19 +44,21 @@ func LogInit() {
 	stdout := config.GetConfig().Logger.Stdout
 	if stdout == "file" {
 		multiWriter = io.MultiWriter(fsWriter)
-	}else if stdout == "stdout"{
+	} else if stdout == "stdout" {
 		multiWriter = io.MultiWriter(os.Stdout)
-	}else {
+	} else {
 		multiWriter = io.MultiWriter(fsWriter, os.Stdout)
 	}
-
+	// 显示行号和函数名称
 	log.SetReportCaller(true)
-	log.SetFormatter(&log.JSONFormatter{})
+	//log.SetFormatter(&log.JSONFormatter{})
+	log.SetFormatter(&log.TextFormatter{
+		ForceQuote:      true,                  //键值对加引号
+		TimestampFormat: "2006-01-02 15:04:05", //时间格式
+		FullTimestamp:   true,
+	})
+	// 日志文件io
 	log.SetOutput(multiWriter)
 	log.SetLevel(LevelMap[config.GetConfig().Logger.LogLevel])
-	log.SetFormatter(&log.TextFormatter{
-		ForceQuote:true,    //键值对加引号
-		TimestampFormat:"2006-01-02 15:04:05",  //时间格式
-		FullTimestamp:true,
-	})
+
 }
