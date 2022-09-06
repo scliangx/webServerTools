@@ -3,15 +3,16 @@ package routes
 import (
 	"context"
 	"fmt"
-	"github.com/gin-gonic/gin"
-	"github.com/scliang-strive/webServerTools/config"
-	middleware "github.com/scliang-strive/webServerTools/middlewares"
 	"io/ioutil"
 	"log"
 	"net/http"
 	"os"
 	"os/signal"
 	"time"
+
+	"github.com/gin-gonic/gin"
+	"github.com/scliang-strive/webServerTools/config"
+	middleware "github.com/scliang-strive/webServerTools/middlewares"
 )
 
 func InitApiRouter() *gin.Engine {
@@ -26,7 +27,7 @@ func InitApiRouter() *gin.Engine {
 		router = gin.Default()
 	}
 	router.Use(middleware.LoggerMiddleware())
-	router.Static("../static","./static")
+	router.Static("../static", "./static")
 	//router.Use(middleware.GinLogger())
 	ApiRouter(router)
 	return router
