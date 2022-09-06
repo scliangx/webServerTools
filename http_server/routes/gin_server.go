@@ -15,7 +15,7 @@ import (
 	middleware "github.com/scliang-strive/webServerTools/middlewares"
 )
 
-func InitApiRouter() *gin.Engine {
+func InitApiRouter() {
 	var router *gin.Engine
 	if config.GetConfig().Debug {
 		gin.DefaultWriter = ioutil.Discard
@@ -29,10 +29,10 @@ func InitApiRouter() *gin.Engine {
 	router.Use(middleware.LoggerMiddleware())
 	router.Static("../static", "./static")
 	ApiRouter(router)
-	return router
+	runHttpServer(router)
 }
 
-func Run(router *gin.Engine) {
+func runHttpServer(router *gin.Engine) {
 	srv := &http.Server{
 		Addr:    fmt.Sprintf(":%d", config.GetConfig().WebConfig.Port),
 		Handler: router,

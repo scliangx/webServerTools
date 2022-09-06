@@ -35,7 +35,6 @@ func main() {
 
 	if err := app.Run(os.Args); err != nil {
 		logrus.Error("[error] : %s", err)
-		panic(err)
 	}
 }
 
@@ -46,17 +45,20 @@ func run(c *cli.Context) error {
 	logger.LogInit()
 	fmt.Println("------------log init success------------------")
 	conf := config.GetConfig()
-	err := db.NewConnection(conf.DB)
-	if err != nil {
-		logrus.Fatalln("database init failed.")
-	} else {
-		fmt.Println("------------database init success------------------")
+	// 初始化组件配置
+	{
+		err := db.NewConnection(conf.DB)
+		if err != nil {
+			logrus.Fatalln("database init failed.")
+		} else {
+			fmt.Println("------------database init success------------------")
+		}
+		//redis.NewRedisClient()
+		redis.InitRedisClientPool(conf.Redis)
+		fmt.Println("------------redis init success----------------------")
 	}
-	//redis.NewRedisClient()
-	redis.InitRedisClientPool(conf.Redis)
-	fmt.Println("------------redis init success----------------------")
-	router := routes.InitApiRouter()
-	routes.Run(router)
+
+	routes.InitApiRouter()
 	fmt.Println("-------------------apps end------------------")
 	return nil
 }
