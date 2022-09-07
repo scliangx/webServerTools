@@ -21,7 +21,7 @@
     ├─internal                   项目服务核心组件
     │  ├─db                      数据库组件
     │  ├─elasticsearch           es组件相关实现
-    │  ├─grpc                    grpc相关
+    │  ├─grpc                    grpc相关案例
     │  ├─kafka                   kafka消息队列组件
     │  ├─redis                   redis组件
     │  └─sessions                session实现
