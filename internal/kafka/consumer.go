@@ -2,11 +2,10 @@ package kafka
 
 import (
 	"fmt"
+
 	"github.com/confluentinc/confluent-kafka-go/kafka"
 	"github.com/scliang-strive/webServerTools/config"
 )
-
-
 
 func InitConsumer(cfg config.KafkaConfig) *kafka.Consumer {
 	fmt.Print("init kafka consumer, it may take a few seconds to init the connection\n")
