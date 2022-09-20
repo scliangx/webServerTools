@@ -21,7 +21,7 @@ func InitApiRouter() {
 		gin.DefaultWriter = ioutil.Discard
 		router = gin.New()
 		// 载入gin的中间件，关键是第二个中间件，我们对它进行了自定义重写，将可能的 panic 异常等
-		router.Use(middleware.CustomRecovery())
+		router.Use(middleware.GinRecovery())
 	} else {
 		gin.SetMode(gin.ReleaseMode)
 		router = gin.Default()
