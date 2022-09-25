@@ -23,6 +23,7 @@
     │  ├─elasticsearch           es组件相关实现
     │  ├─grpc                    grpc相关案例
     │  ├─kafka                   kafka消息队列组件
+    │  ├─mongodb                 mongodb组件
     │  ├─redis                   redis组件
     │  └─sessions                session实现
     ├─middlewares                中间件
