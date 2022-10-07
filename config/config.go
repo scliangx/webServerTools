@@ -70,6 +70,15 @@ type Elasticsearch struct {
 	APIKey   string   `json:"api_key" yaml:"api_key"`
 }
 
+type MongoConf struct {
+	Host            string `json:"host" yaml:"host"`
+	User            string `json:"user" yaml:"user"`
+	Password        string `json:"password" yaml:"password"`
+	MaxPoolSize     int    `json:"max_pool_size" yaml:"max_pool_size"`
+	ConnectTimeout  int    `json:"connect_timeout" yaml:"connect_timeout"`
+	MaxConnIdleTime int    `json:"max_conn_idle_time" yaml:"max_conn_idle_time"`
+}
+
 // WebServer 服务地址端口配置
 type WebServer struct {
 	Address string `json:"address" yaml:"address"`
@@ -84,6 +93,7 @@ type config struct {
 	DB        []Database    `json:"db" yaml:"db"`
 	Redis     RedisConfig   `json:"redis" yaml:"redis"`
 	ES        Elasticsearch `json:"es" yaml:"es"`
+	Mongo     MongoConf     `json:"mongo" yaml:"mongo"`
 }
 
 var C = new(config)

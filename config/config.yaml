@@ -51,3 +51,10 @@ es:
   host: [""]
   username: ""
   password: ""
+mongo:
+  host: ""
+  user: ""
+  password: ""
+  max_pool_size: 1
+  connect_timeout: 1000
+  max_conn_idle_time: 10000

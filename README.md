@@ -33,7 +33,11 @@
   request -> apps -> router -> controller -> manager -> controller -> response
  ```
 ### run app:
-```text
+```shell
+# 编译proto
+protoc -I . --go_out=plugins=grpc:. ./*.proto
+
+# 运行程序
 go run apps/main.go web-server --config ./config.yaml
 ```
 <h6>-------------文中有许多借鉴于别人的blog进行集成的的地方，不足之处多指教-------------------</h6>
