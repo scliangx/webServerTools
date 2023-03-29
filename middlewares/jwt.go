@@ -4,14 +4,17 @@ import (
 	"errors"
 	"github.com/dgrijalva/jwt-go"
 	"time"
+	"github.com/scliang-strive/webServerTools/common/response"
+	"strconv"
+	"github.com/gin-gonic/gin"
 )
 
-// JwtSign 定义一个 JWT验签 结构体
-type JwtSign struct {
-	SigningKey []byte
-}
 
-// CustomClaims 自定义jwt的声明字段信息+标准字段
+const (
+	SingKey        = ""
+	JWTExpiresTime = 10000
+)
+
 type CustomClaims struct {
 	UserId int64  `json:"user_id"`
 	Name   string `json:"user_name"`
@@ -19,13 +22,51 @@ type CustomClaims struct {
 	jwt.StandardClaims
 }
 
-// CreateMyJWT 使用工厂创建一个 JWT 结构体
-func CreateMyJWT(signKey string) *JwtSign {
-	if len(signKey) <= 0 {
-		signKey = "token"
+// JwtSign 定义一个 JWT验签 结构体
+type JwtSign struct {
+	SigningKey []byte
+}
+
+type JWT struct {
+	SigningKey []byte
+}
+
+func JWTAuth() gin.HandlerFunc {
+	return func(c *gin.Context) {
+		// 我们这里jwt鉴权取头部信息 x-token 登录时回返回token信息 这里前端需要把token存储到cookie或者本地localStorage中 不过需要跟后端协商过期时间 可以约定刷新令牌或者重新登录
+		token := c.Request.Header.Get("x-token")
+		if token == "" {
+			response.FailWithDetailed(gin.H{"reload": true}, "未登录或非法访问", c)
+			c.Abort()
+			return
+		}
+
+		j := CreateMyJWT()
+		// parseToken 解析token包含的信息
+		claims, err := j.ParseToken(token)
+		if err != nil {
+			response.FailWithDetailed(gin.H{"reload": true}, err.Error(), c)
+			c.Abort()
+			return
+		}
+
+		if claims.ExpiresAt-time.Now().Unix() < JWTExpiresTime {
+			claims.ExpiresAt = time.Now().Unix() + JWTExpiresTime
+			newToken, _ := j.CreateToken(*claims)
+			newClaims, _ := j.ParseToken(newToken)
+			c.Header("new-token", newToken)
+			c.Header("new-expires-at", strconv.FormatInt(newClaims.ExpiresAt, 10))
+
+		}
+		c.Set("claims", claims)
+		c.Next()
 	}
+}
+
+// CreateMyJWT 使用工厂创建一个 JWT 结构体
+func CreateMyJWT() *JwtSign {
 	return &JwtSign{
-		[]byte(signKey),
+		[]byte(SingKey),
 	}
 }
 
@@ -78,3 +119,4 @@ func (j *JwtSign) RefreshToken(tokenString string, extraAddSeconds int64) (strin
 		return "", err
 	}
 }
+
