@@ -13,7 +13,8 @@ import (
 	"google.golang.org/grpc/connectivity"
 )
 
-const DefaultLogPath = "/var/agent/agent.log" // 默认输出日志文件路径
+const DefaultLogPath = "/var/agent/" // 默认输出日志文件路径
+const DefaultLogName = "default.log"
 
 type LogConfigs struct {
 	LogLevel          string // 日志打印级别 debug  info  warning  error
@@ -84,6 +85,9 @@ func getLogWriter(conf LogConfigs) (zapcore.WriteSyncer, error) {
 	if exist := IsExist(conf.LogPath); !exist {
 		if conf.LogPath == "" {
 			conf.LogPath = DefaultLogPath
+		}
+		if conf.LogFileName == "" {
+			conf.LogFileName = DefaultLogName
 		}
 		if err := os.MkdirAll(conf.LogPath, os.ModePerm); err != nil {
 			conf.LogPath = DefaultLogPath
