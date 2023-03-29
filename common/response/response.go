@@ -78,3 +78,12 @@ func ParseForm(c *gin.Context, obj interface{}) error {
 	}
 	return nil
 }
+
+func FailWithMessage(message string, c *gin.Context) {
+	SendError(c, 500, 999, message, map[string]interface{}{})
+}
+
+func FailWithDetailed(data interface{}, message string, c *gin.Context) {
+	SendError(c, 500, 999, message, data)
+}
+
