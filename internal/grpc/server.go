@@ -8,6 +8,7 @@ import (
 	"golang.org/x/net/context"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/grpclog"
+	"google.golang.org/grpc/reflection"
 )
 
 const (
@@ -40,7 +41,8 @@ func Server() {
 
 	// 注册HelloService
 	pb.RegisterHelloServer(s, HelloService)
-
+	// 调用反射，可以使用grpcurl进行调试
+	reflection.Register(s)
 	fmt.Printf("listen on %s \n",serverAddress)
 	s.Serve(listen)
 }
