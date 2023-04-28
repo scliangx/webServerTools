@@ -3,7 +3,7 @@ package kafka
 import (
 	"fmt"
 	"github.com/confluentinc/confluent-kafka-go/kafka"
-	"github.com/scliang-strive/webServerTools/config"
+	"github.com/coderitx/webServerTools/config"
 	"testing"
 )
 

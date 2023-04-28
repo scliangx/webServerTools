@@ -1,7 +1,7 @@
 package db
 
 import (
-	"github.com/scliang-strive/webServerTools/config"
+	"github.com/coderitx/webServerTools/config"
 	"testing"
 )
 

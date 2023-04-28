@@ -4,7 +4,7 @@ import (
 	"fmt"
 
 	"github.com/confluentinc/confluent-kafka-go/kafka"
-	"github.com/scliang-strive/webServerTools/config"
+	"github.com/coderitx/webServerTools/config"
 )
 
 func InitConsumer(cfg config.KafkaConfig) *kafka.Consumer {

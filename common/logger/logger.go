@@ -1,8 +1,8 @@
 package logger
 
 import (
-	"github.com/scliang-strive/webServerTools/config"
-	"github.com/scliang-strive/webServerTools/utils"
+	"github.com/coderitx/webServerTools/config"
+	"github.com/coderitx/webServerTools/utils"
 	"io"
 	"os"
 	"path"

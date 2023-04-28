@@ -5,7 +5,7 @@ import (
 	"time"
 
 	"github.com/gomodule/redigo/redis"
-	"github.com/scliang-strive/webServerTools/config"
+	"github.com/coderitx/webServerTools/config"
 )
 
 var redisPool *redis.Pool

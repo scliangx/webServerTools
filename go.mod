@@ -1,4 +1,4 @@
-module github.com/scliang-strive/webServerTools
+module github.com/coderitx/webServerTools
 
 go 1.17
 

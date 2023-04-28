@@ -5,7 +5,7 @@ import (
 	"context"
 	"encoding/json"
 	"github.com/elastic/go-elasticsearch/v7"
-	"github.com/scliang-strive/webServerTools/config"
+	"github.com/coderitx/webServerTools/config"
 	"github.com/sirupsen/logrus"
 )
 

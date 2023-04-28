@@ -11,8 +11,8 @@ import (
 	"time"
 
 	"github.com/gin-gonic/gin"
-	"github.com/scliang-strive/webServerTools/config"
-	middleware "github.com/scliang-strive/webServerTools/middlewares"
+	"github.com/coderitx/webServerTools/config"
+	middleware "github.com/coderitx/webServerTools/middlewares"
 )
 
 func InitApiRouter() {
