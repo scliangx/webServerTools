@@ -42,7 +42,7 @@ go run apps/main.go web-server --config ./config.yaml
 ```
 
 ### 有任何问题欢迎联系
-![coder小新]([https://github.com/coderitx/webServerTools/assets/54300717/a6308135-9f01-4b77-8213-06e2f4979c6f](https://wx-1317712916.cos.ap-beijing.myqcloud.com/%E6%89%AB%E7%A0%81_%E6%90%9C%E7%B4%A2%E8%81%94%E5%90%88%E4%BC%A0%E6%92%AD%E6%A0%B7%E5%BC%8F-%E6%A0%87%E5%87%86%E8%89%B2%E7%89%88.png))
+![coder小新]([https://wx-1317712916.cos.ap-beijing.myqcloud.com/%E6%89%AB%E7%A0%81_%E6%90%9C%E7%B4%A2%E8%81%94%E5%90%88%E4%BC%A0%E6%92%AD%E6%A0%B7%E5%BC%8F-%E6%A0%87%E5%87%86%E8%89%B2%E7%89%88.png])
 
 
 <h6>-------------文中有许多借鉴于别人的blog进行集成的的地方，不足之处多指教-------------------</h6>
