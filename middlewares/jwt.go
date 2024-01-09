@@ -4,7 +4,7 @@ import (
 	"errors"
 	"github.com/dgrijalva/jwt-go"
 	"time"
-	"github.com/coderitx/webServerTools/common/response"
+	"github.com/scliangx/webServerTools/common/response"
 	"strconv"
 	"github.com/gin-gonic/gin"
 )

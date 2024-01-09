@@ -5,7 +5,7 @@ import (
 	"time"
 
 	"github.com/go-redis/redis"
-	"github.com/coderitx/webServerTools/config"
+	"github.com/scliangx/webServerTools/config"
 	"github.com/sirupsen/logrus"
 )
 

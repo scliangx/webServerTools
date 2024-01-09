@@ -1,7 +1,7 @@
 package db
 
 import (
-	"github.com/coderitx/webServerTools/config"
+	"github.com/scliangx/webServerTools/config"
 	"testing"
 )
 

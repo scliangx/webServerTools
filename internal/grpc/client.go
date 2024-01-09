@@ -3,7 +3,7 @@ package grpc
 
 import (
 	"fmt"
-	pb "github.com/coderitx/webServerTools/proto" // 引入proto包
+	pb "github.com/scliangx/webServerTools/proto" // 引入proto包
 	"golang.org/x/net/context"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/grpclog"

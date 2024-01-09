@@ -2,14 +2,14 @@ package main
 
 import (
 	"fmt"
-	"github.com/coderitx/webServerTools/http_server/routes"
-	"github.com/coderitx/webServerTools/internal/db"
-	"github.com/coderitx/webServerTools/internal/redis"
+	"github.com/scliangx/webServerTools/http_server/routes"
+	"github.com/scliangx/webServerTools/internal/db"
+	"github.com/scliangx/webServerTools/internal/redis"
 	"os"
 	"runtime"
 
-	"github.com/coderitx/webServerTools/common/logger"
-	"github.com/coderitx/webServerTools/config"
+	"github.com/scliangx/webServerTools/common/logger"
+	"github.com/scliangx/webServerTools/config"
 	"github.com/sirupsen/logrus"
 	"github.com/urfave/cli/v2"
 )

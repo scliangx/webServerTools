@@ -1,8 +1,8 @@
 package logger
 
 import (
-	"github.com/coderitx/webServerTools/config"
-	"github.com/coderitx/webServerTools/utils"
+	"github.com/scliangx/webServerTools/config"
+	"github.com/scliangx/webServerTools/utils"
 	"io"
 	"os"
 	"path"
