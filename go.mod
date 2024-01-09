@@ -1,4 +1,4 @@
-module github.com/coderitx/webServerTools
+module github.com/scliangx/webServerTools
 
 go 1.17
 
