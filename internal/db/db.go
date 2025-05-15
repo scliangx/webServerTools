@@ -50,6 +50,14 @@ func NewConnection(dbConfig []config.Database) error {
 	return nil
 }
 
-func BossDB() map[string]*gorm.DB {
-	return connection
+func MysqlDB() *gorm.DB{
+	return connection[Mysql]
 }
+
+func PostgresDB() *gorm.DB{
+	return connection[PostgreSql]
+}
+
+// func BossDB() map[string]*gorm.DB {
+// 	return connection
+// }
